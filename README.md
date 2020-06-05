@@ -11,6 +11,11 @@ This solution is written in Python and uses a CloudFormation Template.
 
 This solution expects a CSV file as per the [example file](sample_file.csv).  If making changes, please review both Lambda functions.
 
+Prereqs:
+* Name of a unique Amazon S3 Bucket
+* Amazon Pinpoint Project setup
+* A short or long code provisioned in Amazon Pinpoint
+
 [CFN Template](template.yaml)
 
 ![Architecture](diagram.png)
