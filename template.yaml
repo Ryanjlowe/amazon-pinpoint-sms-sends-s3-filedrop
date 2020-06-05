@@ -297,7 +297,6 @@ Resources:
           import logging
           import traceback
           import os
-          from time import sleep
 
           pinpoint = boto3.client('pinpoint')
 
@@ -372,13 +371,6 @@ Resources:
                   'body':  {'message': 'error'}
               }
               return json.dumps(result)
-
-            # There is a default max sending limit of 100 messages per short code
-            # This function is configured to send 10 messages at a time
-            # Because this is a FIFO queue, we are guaranteed concurrency of 1 per short code
-            # to ensure we are not throttled, introduce a sleep of .1 second
-            # this can be removed if testing shows this function takes longer than .1 to execute
-            sleep(0.1)
 
             result = {
                 'statusCode': '200',
