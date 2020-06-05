@@ -9,6 +9,8 @@ This solution takes advantages of an Amazon SQS FIFO Queue to ensure that we are
 
 This solution is written in Python and uses a CloudFormation Template.
 
+This solution expects a CSV file as per the [example file](sample_file.csv).  If making changes, please review both Lambda functions.
+
 [CFN Template](template.yaml)
 
 ![Architecture](diagram.png)
