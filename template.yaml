@@ -203,12 +203,12 @@ Resources:
                       logging.debug('Reading Line: ' + line)
 
                       # TODO - ensure these match with the columns - this needs productionalizing
-                      sms_number, message, adobe_campaign_id, short_code, message_type, id_1, id_2 = list(next(csv.reader(StringIO(line))))
+                      sms_number, message, external_campaign_id, short_code, message_type, id_1, id_2 = list(next(csv.reader(StringIO(line))))
 
                       msg = {
                         'sms_number': sms_number,
                         'message': message,
-                        'adobe_campaign_id': adobe_campaign_id,
+                        'external_campaign_id': external_campaign_id,
                         'short_code': short_code,
                         'message_type': message_type,
                         'id_1': id_1,
@@ -219,7 +219,7 @@ Resources:
                       response = sqs.send_message(
                           QueueUrl=queue_url,
                           MessageBody=json.dumps(msg),
-                          MessageDeduplicationId="%s-%s" % (sms_number, adobe_campaign_id),
+                          MessageDeduplicationId="%s-%s" % (sms_number, external_campaign_id),
                           MessageGroupId=short_code
                       )
 
@@ -330,7 +330,7 @@ Resources:
                   'BodyOverride': msg['message'],
                   'ChannelType': 'SMS',
                   'Context': {
-                      'adobe_campaign_id': msg['adobe_campaign_id'],
+                      'external_campaign_id': msg['external_campaign_id'],
                       'id_1': msg['id_1'],
                       'id_2': msg['id_2']
                   }
